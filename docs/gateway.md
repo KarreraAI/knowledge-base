@@ -42,9 +42,9 @@ graph LR
 
     subgraph Compute Engine VM/Backend Services
         direction LR
-        C1[User Session Init App]
-        C2[Search From Web App]
-        C3[CV Reader App]
+        C1[User Session Init]
+        C2[Search From Web ]
+        C3[CV Reader]
     end
 
     A -- HTTPS Requests --> B
@@ -54,9 +54,9 @@ graph LR
     B -- Internal HTTP/S Requests --> C3
 
     style B fill:#e0f2f7,stroke:#39a0b9,stroke-width:2px
-    style C1 fill:#f2e0f7,stroke:#a039b9,stroke-width:2px
-    style C2 fill:#f2e0f7,stroke:#a039b9,stroke-width:2px
-    style C3 fill:#f2e0f7,stroke:#a039b9,stroke-width:2px
+    style C1 fill:#f2e0f7,stroke:#000000,stroke-width:2px
+    style C2 fill:#f2e0f7,stroke:#000000,stroke-width:2px
+    style C3 fill:#f2e0f7,stroke:#000000,stroke-width:2px
 
 ```
 
@@ -175,7 +175,7 @@ produces:
 # Define the backend address
 x-google-backend:
   address: http://<YOUR_VM_INTERNAL_IP>:<YOUR_APP_PORT> 
-  deadline: 600.0 
+  deadline: 600.0 ## the timeout limit, in seconds
 
 # Define each endpoint under paths
 paths:
