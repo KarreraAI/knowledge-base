@@ -148,7 +148,7 @@ For a user or service account involved in creating, deploying, and managing an A
     
 - **Output**: Here's a small version of the OpenAPI spec used:
 
-```yaml 
+```yaml title="api-gateway-spec.yaml" linenums="1"
 # Basic information
 swagger: "2.0"
 info:
