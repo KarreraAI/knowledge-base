@@ -5,6 +5,7 @@ This document explains the setup of the API Gateway for the project **Karrera - 
 ## Overview: Managed API Gateways for VM backends
 
 Google's API Gateway acts as a single entry point for all API calls, sitting in front of your backend services. When your backend is a Compute Engine VM, the API Gateway provides a managed layer that handles:
+
 * **Traffic Management**: Routes incoming requests to your VM application.
 * **Security**: Enforces API keys, providing a crucial layer of access control before requests even reach your VM.
 * **Decoupling**: Hides the VM's internal IP address and specific network configuration from external clients.
