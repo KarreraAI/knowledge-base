@@ -40,7 +40,7 @@ graph LR
         B[Google Cloud API Gateway]
     end
 
-    subgraph Compute Engine VM (Backend Services)
+    subgraph Compute Engine VM/Backend Services
         direction LR
         C1[User Session Init App]
         C2[Search From Web App]
