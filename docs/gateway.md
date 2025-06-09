@@ -275,7 +275,7 @@ Thorough testing is essential to confirm that your API Gateway is correctly conf
     * Send the request.
     * **Expected Outcome:** You should receive an HTTP `401 Unauthorized` or `403 Forbidden` response. This indicates that the API Gateway successfully detected the missing API key and blocked the unauthorized request, confirming your security measures are working.
 
-## Step 6: Monitoring and Logging
+### Step 6: Monitoring and Logging
 
 Google Cloud API Gateway is deeply integrated with Cloud Logging and Cloud Monitoring, providing out-of-the-box observability for your API traffic and performance.
 
