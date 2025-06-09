@@ -53,10 +53,10 @@ graph LR
     B -- Internal HTTP/S Requests --> C2
     B -- Internal HTTP/S Requests --> C3
 
-    style B fill:#e0f2f7,stroke:#39a0b9,stroke-width:2px
-    style C1 fill:#f2e0f7,stroke:#000000,stroke-width:2px
-    style C2 fill:#f2e0f7,stroke:#000000,stroke-width:2px
-    style C3 fill:#f2e0f7,stroke:#000000,stroke-width:2px
+    style B fill:#e0f2f7,stroke:#39a0b9,stroke-width:2px,font-color:#000000
+    style C1 fill:#f2e0f7,stroke:#a039b9,stroke-width:2px,font-color:#000000
+    style C2 fill:#f2e0f7,stroke:#a039b9,stroke-width:2px,font-color:#000000
+    style C3 fill:#f2e0f7,stroke:#a039b9,stroke-width:2px,font-color:#000000
 
 ```
 
