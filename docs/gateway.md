@@ -143,11 +143,12 @@ For a user or service account involved in creating, deploying, and managing an A
     6. Add security scheme definitions (API keys for now)
 
 - **Key elements for a VM backend**:
-    * ***x-google-backend.address***: This is the most crucial part. It must point to the internal IP address and port of your Compute Engine VM.
-    * ***securityDefinitions and security***: For API Key enforcement.
+    * ***`x-google-backend.address`***: This is the most crucial part. It must point to the internal IP address and port of your Compute Engine VM.
+    * ***`securityDefinitions` and `security`***: For API Key enforcement.
     
 - **Output**: Here's a small version of the OpenAPI spec used:
-```yaml API CONFIG FILE
+
+```yaml 
 # Basic information
 swagger: "2.0"
 info:
@@ -204,6 +205,7 @@ paths:
         200:
           description: OK
 ```
+
 > [!IMPORTANT] 
 > Replace <YOUR_VM_INTERNAL_IP> and <YOUR_APP_PORT> with the Karrera VM's internal IP and the port.
 
