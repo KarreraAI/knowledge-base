@@ -19,6 +19,7 @@ graph LR
     subgraph Edit Biography
         I1[Save Edited Bio]
         I2[Get Selected Bio]
+    end
     
     A --> B
     A --> C
