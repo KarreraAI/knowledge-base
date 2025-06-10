@@ -14,13 +14,7 @@ graph LR
     end
     E[Filter Entities]
     F[JSON Processor]
-    G[Extract Biography]
-    H[Generate Picture]
-    subgraph Edit Biography
-        I1[Save Edited Bio]
-        I2[Get Selected Bio]
-    end
-    
+   
     A --> B
     A --> C
     A --> D1
@@ -31,6 +25,23 @@ graph LR
     C --> E
     D4 --> E
     E --> F
-    F --> G
-    G --> H 
+```
+
+```mermaid
+graph LR
+    A[Combined JSON]
+    B[Extract Biography]
+    C[Generate Picture]
+    subgraph Edit Biography
+        direction LR
+        D1[Get Selected Bio]
+        D2[Save Edited Bio]
+    end
+    
+    A --> B
+    B --> D1
+    B --> C
+    D1 <--> D2
+    
+    
 ```
