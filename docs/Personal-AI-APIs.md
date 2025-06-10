@@ -47,7 +47,6 @@ Creates the **User Session**, saving all necessary arguments for the session in 
       * name = User full name
     * **RETURNS:**
       * Start the user session in Redis under {user-id}
-    * **Redis Arguments:**
 
     ??? info "Redis Arguments:" 
         ```
