@@ -242,6 +242,7 @@ Creates a chat between an AI agent and the user. The objective is inquiring abou
 
 #### Create Conversation:
 If the user already has a biography created on the app, this API generates personalized questions for the user, otherwise it uses generic questions to start.
+
 * **Endpoint = /create_conversation**  
     * **INPUTS:**
         * user-id = Identifies the user session
@@ -260,6 +261,7 @@ If the user already has a biography created on the app, this API generates perso
 
 #### Send Chosen Question:
 Lets the user choose one of the five questions to start the conversation.
+
 * **Endpoint = /send_chosen_question**  
     * **INPUTS:**
         * user-id = Identifies the user session
@@ -275,6 +277,7 @@ Lets the user choose one of the five questions to start the conversation.
 
 #### Chat Session:
 Maintains the conversation between the AI agent and the user. 
+
 * **Endpoint = /chat_session**  
     * **INPUTS:**
         * user-id = Identifies the user session
@@ -289,6 +292,7 @@ Maintains the conversation between the AI agent and the user.
         ```
 #### Extract Chat Information:
 Extract a list of entities and relations from a conversation history.
+
 * **Endpoint = /extract_from_chat**  
     * **INPUTS:**
         * user-id = Identifies the user session
