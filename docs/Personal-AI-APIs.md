@@ -39,6 +39,33 @@ graph LR
 ## APIs Endpoints
 
 ### User Init. API:
+Creates the **User Session**, saving all necessary arguments for the session in Redis.
+
+* **Endpoint = /user_session_init**  
+    * **INPUTS:**
+      * user-id = Identifies the user session 
+      * name = User full name
+    * **RETURNS:**
+      * Start the user session in Redis under {user-id}
+    * **Redis Arguments:**
+
+    ??? info "Redis Arguments:"
+
+      * .name = name
+      * .JSON_scrape = ''
+      * .JSON_cv = ''
+      * .JSON_chat = ''
+      * .JSON_scrape_filtered = ''
+      * .JSON_cv_filtered = ''
+      * .JSON_chat_filtered = ''
+      * .JSON_combined = ''
+      * .bio = ''
+      * .edited_bio = ''
+      * .bio_flag = ''
+      * .working_env = ''
+      * .user_last_method = ''
+
+
 
 ### Upload CV:
 
