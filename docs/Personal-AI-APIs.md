@@ -7,13 +7,13 @@ This document explains the APIs interactions of the Personal AI backend for the 
 The user will begin by creating a session and then choosing between three different methods for providing the application with information pertaining to himself, searching the web, uploading a resume (CV) or just having a conversation with an AI agent.
 All three methods can be used in conjunction and will contribute to a better overall understanding of the user. 
 
-The main order of interaction will be as detailed in the following diagram:
+The main order of interaction is detailed in the following diagram:
 
 ```mermaid
 graph LR
     A[User Init API]
     B[Upload CV]
-    C[Scrape Web]
+    C[Scrape the Web]
     subgraph Chat with AI
         direction LR
         D1[Create Conversation]
@@ -35,6 +35,43 @@ graph LR
     D4 --> E
     E --> F
 ```
+
+## APIs Endpoints
+
+### User Init. API:
+
+### Upload CV:
+
+### Scrape the Web:
+
+### Chat with AI:
+
+#### Create Conversation:
+
+#### Send Chosen Question:
+
+#### Chat Session:
+
+#### Extract Chat Information:
+
+### Filter Entities:
+
+### JSON Processor:
+
+
+## Biography and Picture
+
+### Extract Bio:
+
+### Generate Picture:
+
+### Edit Biography
+
+#### Get Selected Bio:
+
+#### Save Edited Bio:
+
+
 
 ```mermaid
 graph LR
