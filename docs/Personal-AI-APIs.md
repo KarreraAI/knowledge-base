@@ -71,6 +71,8 @@ Reads a curriculum sent by the user, either in .pdf or .docx, and extracts from 
     * **INPUTS:**
         * user-id = Identifies the user session 
         * file = curriculum document (.pdf or .docx)
+        * From Redis:
+            * .name = name of the user
     * **RETURNS:**
         * A JSON file saved in Redis under JSON_cv
     
@@ -156,6 +158,8 @@ Searches the user by their name on the web and extracts entities and relations p
         * user-id = Identifies the user session 
         * location = optional, (default: us), alters the location of the search. Accepts any country name or iso code, as per country_converter python library.
         * add-info = optional, (default: ''), adds information related to the user to the search, filtering the results, specially if the name is common or has a famous namesake.
+        * From Redis:
+            * .name = name of the user
     * **RETURNS:**
         * A JSON file saved in Redis under JSON_scrape
     
@@ -234,15 +238,73 @@ Searches the user by their name on the web and extracts entities and relations p
         ```
 
 ### Chat with AI:
+Creates a chat between an AI agent and the user. The objective is inquiring about the user professional accomplishments and extract those entities/relations from the conversation.
 
 #### Create Conversation:
+If the user already has a biography created on the app, this API generates personalized questions for the user, otherwise it uses generic questions to start.
+* **Endpoint = /create_conversation**  
+    * **INPUTS:**
+        * user-id = Identifies the user session
+        * From Redis:
+            * .name = name of the user
+            * .bio = user biography (optional)
+    * **RETURNS:**
+        * If .bio is in Redis, returns 5 personalized questions, else returns 5 generic questions.
+    
+    ??? info "Redis Arguments:" 
+
+        ```
+        .history = Creates the chat history
+        .questions = json with questions if not using generic questions
+        ```
 
 #### Send Chosen Question:
+Lets the user choose one of the five questions to start the conversation.
+* **Endpoint = /send_chosen_question**  
+    * **INPUTS:**
+        * user-id = Identifies the user session
+        * user-input = One of the questions, chosen by the user
+    * **RETURNS:**
+        * Appends the chosen question to the chat history.
+
+    ??? info "Redis Arguments:" 
+
+        ```
+        .history = Updates the chat history
+        ```
 
 #### Chat Session:
+Maintains the conversation between the AI agent and the user. 
+* **Endpoint = /chat_session**  
+    * **INPUTS:**
+        * user-id = Identifies the user session
+        * user-input = The user answers to the questions
+    * **RETURNS:**
+        * Keeps returning the chat response and questions until the user exits the conversation.
 
+    ??? info "Redis Arguments:" 
+
+        ```
+        .history = Updates the chat history
+        ```
 #### Extract Chat Information:
+Extract a list of entities and relations from a conversation history.
+* **Endpoint = /extract_from_chat**  
+    * **INPUTS:**
+        * user-id = Identifies the user session
+        * user-input = One of the questions, chosen by the user
+        * From Redis:
+            * .name = name of the user
+            * .history = conversation history
+    * **RETURNS:**
+        * A JSON file saved in Redis under JSON_chat
 
+    ??? info "Redis Arguments:" 
+
+        ```
+        .JSON_chat = Returned JSON file
+        .user_last_method = 'chat'
+        ```
 ### Filter Entities:
 
 ### JSON Processor:
