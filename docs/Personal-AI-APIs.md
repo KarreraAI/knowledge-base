@@ -64,9 +64,89 @@ Creates the **User Session**, saving all necessary arguments for the session in 
         .working_env = ''
         .user_last_method = ''
         ```
-
-
 ### Upload CV:
+Reads a curriculum sent by the user, either in .pdf or .docx, and extracts from it a list of entities and relations related to the user.
+
+* **Endpoint = /cv_reader**  
+    * **INPUTS:**
+        * user-id = Identifies the user session 
+        * file = curriculum document (.pdf or .docx)
+    * **RETURNS:**
+        * A JSON file saved in Redis under JSON_cv
+    
+```py title="JSON_example.json" linenums="1"
+{
+   "entities":[
+      {
+         "person":[
+            {
+               "name":"John Jay Doe",
+               "description":"Executive with a diverse and international career",
+               "date":"",
+               "source":[
+                  "User-sent Document"
+               ]
+            }
+         ],
+         "education":[
+            {
+               "name":"University Of John'Doe",
+               "description":"MBA",
+               "date":"2001",
+               "source":[
+                  "User-sent Document"
+               ]
+            }
+         ],
+         "organization":[
+            {
+               "name":"John Doe Company",
+               "description":"Vice President",
+               "date":"",
+               "source":[
+                  "User-sent Document"
+               ]
+            }
+         ],
+         "project":[
+            {
+               "name":"John Doe's Project",
+               "description":"Project Description",
+               "date":"",
+               "source":[
+                  "User-sent Document"
+               ]
+            },
+         ],
+   "relationships":[
+          {
+             "source":"John Jay Doe",
+             "target":"University Of John'Doe",
+             "relationship":"studied at",
+             "relationship_strength":4
+          },
+          {
+             "source":"John Jay Doe",
+             "target":"John Doe Company",
+             "relationship":"worked at",
+             "relationship_strength":4
+          },
+          {
+             "source":"John Jay Doe",
+             "target":"John Doe's Project",
+             "relationship":"created",
+             "relationship_strength":2
+          },    
+   ]
+}
+```
+    
+??? info "Redis Arguments:" 
+
+        ```
+        .JSON_cv = Returned JSON file
+        .user_last_method = 'cv'
+        ```
 
 ### Scrape the Web:
 
