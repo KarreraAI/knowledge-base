@@ -149,6 +149,89 @@ Reads a curriculum sent by the user, either in .pdf or .docx, and extracts from 
         ```
 
 ### Scrape the Web:
+Searches the user by their name on the web and extracts entities and relations pertaining the user from all the text. 
+
+* **Endpoint = /search_from_web**  
+    * **INPUTS:**
+        * user-id = Identifies the user session 
+        * location = optional, (default: us), alters the location of the search. Accepts any country name or iso code, as per country_converter python library.
+        * add-info = optional, (default: ''), adds information related to the user to the search, filtering the results, specially if the name is common or has a famous namesake.
+    * **RETURNS:**
+        * A JSON file saved in Redis under JSON_scrape
+    
+```py title="JSON_example.json" linenums="1"
+{
+   "entities":[
+      {
+         "person":[
+            {
+               "name":"John Jay Doe",
+               "description":"Executive with a diverse and international career",
+               "date":"",
+               "source":[
+                  "https://www.example-site.com"
+               ]
+            }
+         ],
+         "education":[
+            {
+               "name":"University Of John'Doe",
+               "description":"MBA",
+               "date":"2001",
+               "source":[
+                  "https://www.example-site2.com"
+               ]
+            }
+         ],
+         "organization":[
+            {
+               "name":"John Doe Company",
+               "description":"Vice President",
+               "date":"",
+               "source":[
+                  "https://www.example-site2.com"
+               ]
+            }
+         ],
+         "project":[
+            {
+               "name":"John Doe's Project",
+               "description":"Project Description",
+               "date":"",
+               "source":[
+                  "https://www.example-site3.com"
+               ]
+            },
+         ],
+   "relationships":[
+          {
+             "source":"John Jay Doe",
+             "target":"University Of John'Doe",
+             "relationship":"studied at",
+             "relationship_strength":4
+          },
+          {
+             "source":"John Jay Doe",
+             "target":"John Doe Company",
+             "relationship":"worked at",
+             "relationship_strength":4
+          },
+          {
+             "source":"John Jay Doe",
+             "target":"John Doe's Project",
+             "relationship":"created",
+             "relationship_strength":2
+          },    
+   ]
+}
+```
+
+??? info "Redis Arguments:" 
+
+        ```
+        .JSON_scrape = Returned JSON file
+        .user_last_method = 'scrape'
+        ```
 
 ### Chat with AI:
 
