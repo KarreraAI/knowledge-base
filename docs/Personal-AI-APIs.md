@@ -50,7 +50,7 @@ Creates the **User Session**, saving all necessary arguments for the session in 
     * **Redis Arguments:**
 
     ??? info "Redis Arguments:" 
-
+        ```
         .name = name
         .JSON_scrape = ''
         .JSON_cv = ''
@@ -64,7 +64,7 @@ Creates the **User Session**, saving all necessary arguments for the session in 
         .bio_flag = ''
         .working_env = ''
         .user_last_method = ''
-
+        ```
 
 
 ### Upload CV:
