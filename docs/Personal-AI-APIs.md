@@ -43,10 +43,10 @@ Creates the **User Session**, saving all necessary arguments for the session in 
 
 * **Endpoint = /user_session_init**  
     * **INPUTS:**
-      * user-id = Identifies the user session 
-      * name = User full name
+        * user-id = Identifies the user session 
+        * name = User full name
     * **RETURNS:**
-      * Start the user session in Redis under {user-id}
+        * Start the user session in Redis under {user-id}
 
     ??? info "Redis Arguments:" 
         ```
