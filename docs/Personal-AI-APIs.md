@@ -247,7 +247,7 @@ Creates a chat between an AI agent and the user. The objective is inquiring abou
 If the user already has a biography created on the app, this API generates personalized questions for the user, otherwise it uses generic questions to start.
 
 * **Endpoint = /create_conversation**
-* **Method = POST**
+* **Method = GET**
     * **INPUTS:**
         * user-id = Identifies the user session
         * From Redis:
@@ -460,15 +460,85 @@ Extract a list of entities and relations from a conversation history.
         * A JSON file saved in Redis under JSON_chat
 
 ```py title="JSON_example.json" linenums="1"
-
+{
+   "entities":[
+      {
+         "person":[
+            {
+               "name":"John Jay Doe",
+               "description":"The person in the conversation"
+            }
+         ],
+         "education":[
+            {
+               "name":"University Of John'Doe",
+               "description":"A university where John Jay Doe earned his MBA"
+            },
+            {
+               "name":"University Of John'Doe",
+               "description":"A university mentioned in the conversation"
+            }
+         ],
+         "organization":[
+            {
+               "name":"John Doe's Business",
+               "description":"A company where John Jay Doe worked as VP"
+            },
+            {
+               "name":"John Doe's Business",
+               "description":"A company co-founded by John Jay Doe"
+            }
+         ]
+      }
+   ],
+   "relationships":[
+      {
+         "source":"John Jay Doe",
+         "target":"University Of John'Doe",
+         "relationship":"earned MBA from",
+         "relationship_strength":4
+      },
+      {
+         "source":"John Jay Doe",
+         "target":"University Of John'Doe",
+         "relationship":"pursued MBA from",
+         "relationship_strength":4
+      },
+      {
+         "source":"John Jay Doe",
+         "target":"John Doe's Business",
+         "relationship":"worked as VP",
+         "relationship_strength":4
+      },
+      {
+         "source":"John Jay Doe",
+         "target":"John Doe's Business",
+         "relationship":"co-founded",
+         "relationship_strength":4
+      },
+      {
+         "source":"John Jay Doe",
+         "target":"John Doe's Business",
+         "relationship":"implemented data-driven product roadmap",
+         "relationship_strength":3
+      },
+      {
+         "source":"John Jay Doe",
+         "target":"John Doe's Business",
+         "relationship":"identified market gap and created solution",
+         "relationship_strength":3
+      }
+   ]
+}
 ```
 
-    ??? info "Redis Arguments:" 
+??? info "Redis Arguments:" 
 
-        ```
-        .JSON_chat = Returned JSON file
-        .user_last_method = 'chat'
-        ```
+    ```
+    .JSON_chat = Returned JSON file
+    .user_last_method = 'chat'
+    ```
+
 ### Filter Entities:
 
 ### JSON Processor:
