@@ -635,18 +635,9 @@ This JSON file will have all the information selected by the user from all the m
     ```
 
 ## Biography and Picture
+After having some information on a JSON_combined file, the user will be able to have a short biography from it. From the biography he will be able to generate a random picture to use as an avatar. The user will also be able to edit/write his bio if he did not like the generated one. 
 
-### Extract Bio:
-
-### Generate Picture:
-
-### Edit Biography
-
-#### Get Selected Bio:
-
-#### Save Edited Bio:
-
-
+The following diagram summarizes this part of the APIs:
 
 ```mermaid
 graph LR
@@ -666,3 +657,95 @@ graph LR
     
     
 ```
+
+### Extract Bio:
+This API will generate a short biography based on the JSON_combined file. 
+
+* **Endpoint = /extract_bio**
+* **Method = POST**
+    * **INPUTS:**
+        * user-id = Identifies the user session
+        * From Redis:
+            * .name = name of the user
+            * .JSON_combined = if it already exists otherwise it's created
+    * **RETURNS:**
+        * A short biography of the user, saved on Redis as .bio
+
+??? info "Redis Arguments:" 
+
+    ```
+    .bio = User short biography
+    .working_env = Describes the working environment of the user based on the biography. Used to generate a picture later.
+    .JSON_combined = will have all entities selected by the user appended to it as long as they're not repeated
+    ```
+
+### Generate Picture:
+Generates three possible images of the user based on a working environment that is based on his biography. Each image is generated with different ages in mind (20, 40 and 60 years).
+
+* **Endpoint = /get_profile_picture**
+* **Method = GET**
+    * **INPUTS:**
+        * user-id = Identifies the user session
+        * From Redis:
+            * .name = name of the user
+            * .working_env = the working environment of the user based on the biography
+    * **RETURNS:**
+        * Three base64 codes for images.
+
+```py title="images result example"
+{
+    "data": "image/png",
+    "base64": first_image_base64,
+    "base64_2": second_image_base64,
+    "base64_3": third_image_base64
+}
+```
+
+### Edit Biography
+Allow the user edit his biography or write a new one. Also let the APIs know if they should use the edited biography or the generated one.
+
+#### Get Selected Bio:
+
+* **Endpoint = /get_selected_bio**
+* **Method = PUT**
+    * **INPUTS:**
+        * user-id = Identifies the user session
+        * bio-flag = manual/automatic - Sets the biography as manual (user edited) or automatic (generated).
+    * **RETURNS:**
+        * Sets bio-flag on Redis as manual or automatic
+
+??? info "Redis Arguments:" 
+
+    ```
+    .bio-flag = manual or automatic
+    ```
+        
+#### Save Edited Bio:
+Receives the new biography and saves it in Redis as .edited_bio.
+
+* **Endpoint = /save_edited_bio**
+* **Method = POST**
+    * **INPUTS:**
+        * user-id = Identifies the user session
+        * json file = The new biography
+    * **RETURNS:**
+        * Saves the new biography under .edited_bio in Redis
+
+??? info "Redis Arguments:" 
+
+    ```
+    .edited_bio = new biography
+    ```
+
+## Front End only API
+
+### Get Session Data:
+Used by the front end to get any data from the user session.
+
+* **Endpoint = /get_session_data**
+* **Method = GET**
+    * **INPUTS:**
+        * user-id = Identifies the user session
+        * session-data = any data from the session, all/history/etc.
+    * **RETURNS:**
+        * All/part of the user session data
