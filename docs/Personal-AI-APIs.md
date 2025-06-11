@@ -539,10 +539,100 @@ Extract a list of entities and relations from a conversation history.
     .user_last_method = 'chat'
     ```
 
-### Filter Entities:
+### Filter Entities and JSON Processor:
+This API will be called after any data aquiring API, the front end will pass all the entities found on the used method (CV, Web Search or Chat) and presents it to the user. This API will receive all entities selected that the user thinks represents his person and add them to a JSON file called JSON_combined. 
+This JSON file will have all the information selected by the user from all the methods he ever used, serving as a collection of all his extracted entities.  
 
-### JSON Processor:
+* **Endpoint = /json_processor**
+* **Method = POST**
+    * **INPUTS:**
+        * user-id = Identifies the user session
+        * json file = the entities selected by the user, to filter the json, will be saved as .chosen_entities in Redis.
+        * From Redis:
+            * .name = name of the user
+            * .JSON_combined = if it already exists otherwise it's created
+            * .user_last_method = cv, scrape or chat, to know which json is being filtered
+            * .JSON_scrape/cv/chat = the json file from which the user came from (as in .user_last_method)
+    * **RETURNS:**
+        * A JSON file saved in Redis under JSON_combined
 
+```py title="chosen_entities json format"
+{
+    "categories": [
+        {
+            "type": "Person",
+            "tag": "John Jay Doe"
+        },
+        {
+            "type": "Organization",
+            "tag": "John Doe's Business"
+        },
+        {
+            "type": "Education",
+            "tag": "University Of John'Doe"
+        },
+        {
+            "type": "Organization",
+            "tag": "John Doe's Second Business"
+        },
+        {
+            "type": "Organization",
+            "tag": "John Doe Company"
+        }
+    ]
+}
+```
+
+```py title="JSON_combined_example.json" linenums="1"
+{
+   "person":[
+      {
+         "name":"John Jay Doe",
+         "description":"Executive with a diverse and international career",
+         "date":"",
+         "source":[
+            "User-sent Document"
+         ]
+      }
+   ],
+   "organization":[
+      {
+         "name":"John Doe's Business",
+         "description":"Vice President",
+         "date":"",
+         "source":[
+            "https://www.example-site2.com"
+         ]
+      },
+      {
+         "name":"John Doe's Second Business",
+         "description":"Executive Director of Tecnology",
+      },
+      {
+         "name":"John Doe Company",
+         "description":"Co-Founder",
+         "date":"",
+         "source":[
+            "User-sent Document"
+         ]
+      }
+   ],
+   "education":[
+      {
+         "name":"University Of John'Doe",
+         "description":"MBA",
+      }
+   ]
+}
+```
+
+??? info "Redis Arguments:" 
+
+    ```
+    .JSON_scrape/cv/chat_filtered = The respective json file but with only the entities selected by the user
+    .user_last_method = '' ; after passing this method the user_last_method is reset so that the user can run another method from the start
+    .JSON_combined = will have all entities selected by the user appended to it as long as they're not repeated
+    ```
 
 ## Biography and Picture
 
