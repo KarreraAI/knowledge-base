@@ -368,7 +368,7 @@ Maintains the conversation between the AI agent and the user.
     * **RETURNS:**
         * Keeps returning the chat response and questions until the user exits the conversation.
 
-```py title= "user-input (answers)"
+```py title="user-input (answers)"
 {
     "user-input": "I pursued my MBA at the University of John Doe primarily to broaden my business acumen beyond my specialized field and to gain leadership skills for more strategic roles."
 }
@@ -436,7 +436,6 @@ Maintains the conversation between the AI agent and the user.
         "role": "system",
         "content": "1749652526.8790202"
     },
-    ...
     ...
 ]
 ```
